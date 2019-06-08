@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          ReactおじさんがCircleCIとコラボしました。
+          ReactApp。
         </a>
       </header>
     </div>
