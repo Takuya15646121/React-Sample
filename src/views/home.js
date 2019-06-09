@@ -9,7 +9,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { Link } from 'react-router-dom';
 
 import firebase from '../firebase/firebase';
 import UserScreen from './userappearance/userscreen';
@@ -58,11 +57,6 @@ export default class HomeScreen extends React.Component {
 
 
     render() {
-
-        const setParentState = (value) => {
-            
-        }
-
         return (
             <div className={this.useStyles.root}>
             <AppBar position="static">
@@ -74,6 +68,7 @@ export default class HomeScreen extends React.Component {
                 </Toolbar>
             </AppBar>
             <UserScreen/>
+            <HomeBottomNavigation />
             </div>
         );
     }
