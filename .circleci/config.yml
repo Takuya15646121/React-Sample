@@ -80,6 +80,8 @@ workflows:
         - build
         - deploy:
             context: fbs
+            requires: 
+                - build
             filters:
               branches:
                 only: master
