@@ -25,9 +25,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        Username: {this.state.user && this.state.user.displayName}
-        <br />
+      <div className="App">
         {this.state.user ?
           (<button onClick={this.logout}>Logout</button>) :
           (<SignInScreen />)
