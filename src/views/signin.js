@@ -31,8 +31,8 @@ export default class SignInScreen extends React.Component {
   render() {
     return (
       <div>
-        <h1>My App</h1>
-        <p>Please sign-in:</p>
+        <h1>ログインページ</h1>
+        <p>ログインしてください</p>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
     );
