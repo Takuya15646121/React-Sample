@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import BookIcon from '@material-ui/icons/Book';
+import ListIcon from '@material-ui/icons/List';
+import AccountIcon from '@material-ui/icons/AccountBox';
 
 import firebase from '../firebase/firebase';
 import UserScreen from './userappearance/userscreen';
@@ -31,9 +31,9 @@ function HomeBottomNavigation() {
         }}
         style={styles.stickToBottom}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="ホーム" icon={<BookIcon />} />
+        <BottomNavigationAction label="一覧" icon={<ListIcon />} />
+        <BottomNavigationAction label="アカウント" icon={<AccountIcon />} />
       </BottomNavigation>
     );
   }
