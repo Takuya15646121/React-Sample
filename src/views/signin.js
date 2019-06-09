@@ -5,10 +5,13 @@ import firebase from '../firebase/firebase';
 
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/',
+  //signInSuccessUrl: '/',
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID
-  ]
+  ],
+  callbacks: {
+    signInSuccessWithAuthResult: (authResult, redirectUrl) => false
+  },
 };
 
 export default class SignInScreen extends React.Component {
