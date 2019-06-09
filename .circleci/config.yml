@@ -43,6 +43,16 @@ jobs:
     steps:
       - checkout
 
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+
       - run:
           name: 'Install Dependecies'
           command: npm install --save-dev firebase-tools
@@ -51,6 +61,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: 'Build Client Code(react-scripts によるビルド実行)'
+          command: npm run build
 
       - attach_workspace:
           at: .
@@ -66,8 +80,6 @@ workflows:
         - build
         - deploy:
             context: fbs
-            requires:
-                - build
             filters:
               branches:
                 only: master
