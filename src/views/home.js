@@ -9,6 +9,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import BookIcon from '@material-ui/icons/Book';
 import ListIcon from '@material-ui/icons/List';
 import AccountIcon from '@material-ui/icons/AccountBox';
+import CommentIcon from '@material-ui/icons/Comment';
 
 import firebase from '../firebase/firebase';
 import UserScreen from './userappearance/userscreen';
@@ -32,6 +33,7 @@ function HomeBottomNavigation() {
         style={styles.stickToBottom}
       >
         <BottomNavigationAction label="ホーム" icon={<BookIcon />} />
+        <BottomNavigationAction label="承認" icon={<CommentIcon />} />
         <BottomNavigationAction label="一覧" icon={<ListIcon />} />
         <BottomNavigationAction label="アカウント" icon={<AccountIcon />} />
       </BottomNavigation>
