@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import firebase from './firebase/firebase';
 import SignInScreen from './views/signin';
+import HomeScreen from './views/home';
 
 class App extends React.Component {
 
@@ -19,15 +20,11 @@ class App extends React.Component {
     });
   }
 
-  logout() {
-    firebase.auth().signOut();
-  }
-
   render() {
     return (
       <div className="App">
         {this.state.user ?
-          (<button onClick={this.logout}>Logout</button>) :
+          (<HomeScreen />) :
           (<SignInScreen />)
         }
       </div>
