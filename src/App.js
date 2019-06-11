@@ -1,29 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import firebase from './firebase/firebase';
 import SignInScreen from './views/signin';
 import HomeScreen from './views/home';
 
-class App extends React.Component {
+import { actionCreator } from './actions/authenticationAction';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-  state = {
-    loading: true,
-    user: null
-  };
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({
-        loading: false,
-        user: user
-      });
-    });
-  }
+class App extends Component {
 
   render() {
     return (
       <div className="App">
-        {this.state.user ?
+        {this.props.user ?
           (<HomeScreen />) :
           (<SignInScreen />)
         }
@@ -32,4 +21,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default  connect(
+  state => state.authentication,
+  dispatch => bindActionCreators(actionCreator, dispatch)
+) (App);

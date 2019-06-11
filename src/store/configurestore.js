@@ -1,17 +1,31 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import createSagaMiddleware from 'redux-saga'
-import rootSaga from '../api/sagas'
+import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { persistReducer, persistStore} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootSaga from '../sagas/rootSaga';
+import * as appReducer from '../reducers/applicationReducer';
+import * as authReducer from '../reducers/authenticationReducer';
 
-export const reducers = combineReducers({  
-    
+const reducers = combineReducers({  
+    application: appReducer.reducer,
+    authentication: authReducer.reducer
 });
 
-export function configureStore(initialState = {}) {  
+const persistConfig = {
+    key: 'root',
+    storage, 
+    whitelist: ['application'] 
+}
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export default function configureStore(initialState = {}) {  
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
-        reducers,
-        applyMiddleware(sagaMiddleware), 
+        persistedReducer,
+        applyMiddleware(sagaMiddleware)
     );
+    const persistor = persistStore(store);
     sagaMiddleware.run(rootSaga);
-    return store;
+    return {store, persistor};
 };
