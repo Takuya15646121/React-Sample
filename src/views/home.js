@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +14,10 @@ import CommentIcon from '@material-ui/icons/Comment';
 import firebase from '../firebase/firebase';
 import UserScreen from './userappearance/userscreen';
 
+import {actionCreator} from '../actions/applicationAction';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 const styles = {
     stickToBottom: {
       width: '100%',
@@ -22,25 +26,7 @@ const styles = {
     },
 };
 
-function HomeBottomNavigation() {
-    const [value, setValue] = React.useState(0);
-    return (
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        style={styles.stickToBottom}
-      >
-        <BottomNavigationAction label="ホーム" icon={<BookIcon />} />
-        <BottomNavigationAction label="承認" icon={<CommentIcon />} />
-        <BottomNavigationAction label="一覧" icon={<ListIcon />} />
-        <BottomNavigationAction label="アカウント" icon={<AccountIcon />} />
-      </BottomNavigation>
-    );
-  }
-
-export default class HomeScreen extends React.Component {
+class HomeScreen extends Component {
     useStyles = makeStyles(theme => ({
         root: {
           flexGrow: 1,
@@ -57,7 +43,6 @@ export default class HomeScreen extends React.Component {
         firebase.auth().signOut();
     }
 
-
     render() {
         return (
             <div className={this.useStyles.root}>
@@ -70,8 +55,24 @@ export default class HomeScreen extends React.Component {
                 </Toolbar>
             </AppBar>
             <UserScreen/>
-            <HomeBottomNavigation />
+            <BottomNavigation
+              value={this.props.tabNumber}
+              onChange={(event, newValue) => {
+                this.props.tabChange(newValue)
+              }}
+              style={styles.stickToBottom}
+            >
+              <BottomNavigationAction label="ホーム" icon={<BookIcon />} />
+              <BottomNavigationAction label="承認" icon={<CommentIcon />} />
+              <BottomNavigationAction label="一覧" icon={<ListIcon />} />
+              <BottomNavigationAction label="アカウント" icon={<AccountIcon />} />
+            </BottomNavigation>
             </div>
         );
     }
   }
+
+export default  connect(
+    state => state.application,
+    dispatch => bindActionCreators(actionCreator, dispatch)
+) (HomeScreen);
