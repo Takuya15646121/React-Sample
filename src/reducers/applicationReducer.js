@@ -9,6 +9,8 @@ export const reducer = (state, action) => {
                 ...state,
                 tabNumber: action.value
             }
+        default:
+            break;
     }
     return state;
 }
